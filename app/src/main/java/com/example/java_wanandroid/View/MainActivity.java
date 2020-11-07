@@ -1,15 +1,11 @@
-package com.example.java_wanandroid;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.java_wanandroid.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTabHost;
-import androidx.viewpager.widget.PagerAdapter;
-
 import android.os.Bundle;
-import android.view.MenuItem;
 
+import com.example.java_wanandroid.Custom.CustomNav;
+import com.example.java_wanandroid.R;
 
 
 public class MainActivity extends FragmentActivity {
@@ -17,7 +13,7 @@ public class MainActivity extends FragmentActivity {
     private Fragment[] mFragments;
     private String[] mTabTitles;
 
-    private FragmentTabHost mTabHost;
+    private CustomNav mTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +22,15 @@ public class MainActivity extends FragmentActivity {
 
         initData();
         initView();
-        initBottomNav();
     }
 
     private void initView() {
         mTabHost = findViewById(R.id.fragment_tab_host);
-        mTabHost.setup(this,getSupportFragmentManager(),R.id.frame_layout);
-    }
 
-    private void initBottomNav() {
-        for (int i = 0;i<4;i++){
-            mTabHost.addTab(mTabHost.newTabSpec(mTabTitles[i]).setIndicator(mTabTitles[i]),mFragments[i].getClass(),null);
-        }
+        mTabHost.setBasic(this,getSupportFragmentManager(),R.id.frame_layout)
+                .setTabTitle(mTabTitles)
+                .setFragments(mFragments)
+                .build();
     }
 
     private void initData() {
