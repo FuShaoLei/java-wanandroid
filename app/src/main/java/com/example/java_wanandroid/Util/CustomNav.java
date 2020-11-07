@@ -1,4 +1,4 @@
-package com.example.java_wanandroid.Custom;
+package com.example.java_wanandroid.Util;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -44,8 +44,9 @@ public class CustomNav extends FragmentTabHost {
      * build
      */
     public void build(){
-        if (mTabTitle.length!=mFragments.length) return;
-        for (int i = 0;i<mTabTitle.length;i++) {
+        if (mTabTitle.length != mFragments.length) return;
+
+        for (int i = 0 ; i<mTabTitle.length ; i++) {
             this.addTab(this.newTabSpec(mTabTitle[i]).setIndicator(mTabTitle[i]),mFragments[i].getClass(),null);
         }
     }

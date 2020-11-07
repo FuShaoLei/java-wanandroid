@@ -1,11 +1,10 @@
-package com.example.java_wanandroid.View;
+package com.example.java_wanandroid;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTabHost;
+
 import android.os.Bundle;
 
-import com.example.java_wanandroid.Custom.CustomNav;
-import com.example.java_wanandroid.R;
+import com.example.java_wanandroid.Util.CustomNav;
 
 
 public class MainActivity extends FragmentActivity {
