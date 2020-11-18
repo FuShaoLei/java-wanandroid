@@ -1,14 +1,21 @@
 package com.example.java_wanandroid.Base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.java_wanandroid.Bean.Article;
 import com.example.java_wanandroid.R;
+import com.example.java_wanandroid.Util.MyURL;
+import com.example.java_wanandroid.WebViewActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -17,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewHolder> {
     private Context mContext;
     private int mLayout;
-    private List<Article> mList;
+    private List<Article> mList = new ArrayList<>();
 
     public BaseAdapter(Context mContext, int mLayout, List<Article> mList) {
         this.mContext = mContext;
@@ -26,10 +33,13 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewHolder> {
     }
 
     public void resetData(List<Article> list){
-        mList.clear();
+        if (list == null || list.size() == 0){
+            return;
+        }
         mList.addAll(list);
         notifyDataSetChanged();
     }
+
 
     @NonNull
     @Override
@@ -46,9 +56,10 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewHolder> {
         holder.mName.setText(mList.get(position).getSuperChapterName());
     }
 
+
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

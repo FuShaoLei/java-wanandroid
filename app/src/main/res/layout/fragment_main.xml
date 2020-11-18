@@ -54,6 +54,7 @@
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextColor="#fff"
         android:visibility="gone"
+        app:tabMode="scrollable"
         tools:visibility="visible"/>
 
     <androidx.viewpager.widget.ViewPager

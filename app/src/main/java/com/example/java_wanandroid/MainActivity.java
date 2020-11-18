@@ -1,49 +1,50 @@
 package com.example.java_wanandroid;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
-import com.example.java_wanandroid.Util.CustomNav;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.java_wanandroid.Base.BaseActivity;
+import com.example.java_wanandroid.Util.MyURL;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-public class MainActivity extends FragmentActivity {
-
+@Route(path = MyURL.MAIN_PATH)
+public class MainActivity extends BaseActivity {
     private Fragment[] mFragments;
     private String[] mTabTitles;
+    private int[] mTabIcon;
 
-    private CustomNav mTabHost;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initData();
-        initView();
+        ARouter.getInstance().inject(this);
     }
 
-    private void initView() {
-        mTabHost = findViewById(R.id.fragment_tab_host);
+    @Override
+    protected void custom() {
+        super.custom();
+        mMyCustomNav.setVisibility(View.VISIBLE);
+        mFrameLayout.setVisibility(View.VISIBLE);
 
-        mTabHost.setBasic(this,getSupportFragmentManager(),R.id.frame_layout)
+        initData();
+
+        mMyCustomNav.setBasic(this, getSupportFragmentManager(), R.id.frame_layout)
+                .setItemLayout(R.layout.item_tab, R.id.tab_img, R.id.tab_title)
+                .setColor("#DB5860", "#E3E3E3")
+                .setIcon(mTabIcon)
                 .setTabTitle(mTabTitles)
                 .setFragments(mFragments)
                 .build();
+
     }
 
     private void initData() {
-        mFragments = new Fragment[4];
-        mFragments[0] = new Tab1Fragment();
-        mFragments[1] = new Tab2Fragment();
-        mFragments[2] = new Tab3Fragment();
-        mFragments[3] = new Tab4Fragment();
-
-        mTabTitles = new String[4];
-        mTabTitles[0] = "首页";
-        mTabTitles[1] = "项目";
-        mTabTitles[2] = "广场";
-        mTabTitles[3] = "公众号";
+        mFragments = new Fragment[]{new Tab1Fragment(), new Tab2Fragment(), new Tab3Fragment(), new Tab4Fragment()};
+        mTabTitles = new String[]{"首页", "项目", "公众号", "我的"};
+        mTabIcon = new int[]{R.drawable.home_icon, R.drawable.project_icon, R.drawable.gongzonghao_icon, R.drawable.wode_icon};
     }
-
 }

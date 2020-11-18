@@ -9,6 +9,6 @@ public class Tab3Fragment extends BaseFragment {
     protected void custom() {
         super.custom();
         mRelativeLayout.setVisibility(View.VISIBLE);
-        mTitle.setText("广场");
+        mTitle.setText("公众号");
      }
 }

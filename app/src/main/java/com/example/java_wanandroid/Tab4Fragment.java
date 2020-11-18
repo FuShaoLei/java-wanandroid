@@ -9,6 +9,6 @@ public class Tab4Fragment extends BaseFragment {
     protected void custom() {
         super.custom();
         mRelativeLayout.setVisibility(View.VISIBLE);
-        mTitle.setText("公众号");
+        mTitle.setText("我的");
     }
 }
